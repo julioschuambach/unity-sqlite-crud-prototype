@@ -17,6 +17,15 @@ public class User
         LastUpdatedDate = DateTime.Now;
     }
 
+    public User(ReadUserDto readDto)
+    {
+        Id = readDto.Id;
+        Name = readDto.Name;
+        Email = readDto.Email;
+        CreatedDate = readDto.CreatedDate;
+        LastUpdatedDate = readDto.LastUpdatedDate;
+    }
+
     public override string ToString()
         => $"Id: {Id}, Name: {Name}, E-mail: {Email}.";
 }

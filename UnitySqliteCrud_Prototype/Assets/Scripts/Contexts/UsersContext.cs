@@ -11,7 +11,7 @@ public class UsersContext
         {
             return new()
             {
-                "[Id] BLOB PRIMARY KEY NOT NULL UNIQUE",
+                "[Id] STRING PRIMARY KEY NOT NULL UNIQUE",
                 "[Name] STRING NOT NULL",
                 "[Email] STRING NOT NULL UNIQUE",
                 "[CreatedDate] DATETIME NOT NULL",
@@ -50,5 +50,39 @@ public class UsersContext
                 }
             }
         }
+    }
+
+    public List<User> GetAllUsers()
+    {
+        List<User> users = new();
+
+        using (var connection = _databaseContext.GetConnection())
+        {
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandText = "SELECT [Id], [Name], [Email], [CreatedDate], [LastUpdatedDate] FROM [Users]";
+
+                try
+                {
+                    connection.Open();
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            users.Add(
+                                new User(
+                                    new ReadUserDto(reader)));
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+            }
+        }
+
+        return users;
     }
 }

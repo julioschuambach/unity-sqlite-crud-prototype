@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -18,5 +19,12 @@ public class TestManager : MonoBehaviour
     {
         _databaseContext.CreateDatabase();
         _usersContext.CreateTable();
+    }
+
+    public void ListUsers()
+    {
+        List<User> users = _usersContext.GetAllUsers();
+
+        users.ForEach(user => Debug.Log(user.ToString()));
     }
 }
