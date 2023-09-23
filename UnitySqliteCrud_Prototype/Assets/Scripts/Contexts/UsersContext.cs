@@ -1,11 +1,10 @@
-using Mono.Data.Sqlite;
+using System.Text;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
-public class DatabaseManager
+public class UsersContext
 {
-    private readonly string _databaseUri;
+    private readonly DatabaseContext _databaseContext;
     private List<string> UsersTableFields
     {
         get
@@ -18,35 +17,19 @@ public class DatabaseManager
                 "[CreatedDate] DATETIME NOT NULL",
                 "[LastUpdatedDate] DATETIME NOT NULL"
             };
-        } 
-    }
-
-    public DatabaseManager()
-    {
-        _databaseUri = "URI = file:prototype.db";
-    }
-
-    public void CreateDatabase()
-    {
-        using (var connection = GetConnection())
-        {
-            try
-            {
-                connection.Open();
-                connection.Close();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
         }
     }
 
-    public void CreateUsersTable()
+    public UsersContext()
     {
-        using (var connection = GetConnection())
+        _databaseContext = new DatabaseContext();
+    }
+
+    public void CreateTable()
+    {
+        using (var connection = _databaseContext.GetConnection())
         {
-            using (var command = connection.CreateCommand())
+            using (var command = connection.CreateCommand()) 
             {
                 StringBuilder sb = new();
                 sb.AppendLine("CREATE TABLE IF NOT EXISTS");
@@ -68,7 +51,4 @@ public class DatabaseManager
             }
         }
     }
-
-    public SqliteConnection GetConnection()
-        => new(_databaseUri);
 }
