@@ -26,4 +26,15 @@ public class ReadUserDto
         CreatedDate = (DateTime)reader["CreatedDate"];
         LastUpdatedDate = (DateTime)reader["LastUpdatedDate"];
     }
+
+    public ReadUserDto() { }
+
+    public void Fill(SqliteDataReader reader)
+    {
+        Id = new Guid((string)reader["Id"]);
+        Name = (string)reader["Name"];
+        Email = (string)reader["Email"];
+        CreatedDate = (DateTime)reader["CreatedDate"];
+        LastUpdatedDate = (DateTime)reader["LastUpdatedDate"];
+    }
 }

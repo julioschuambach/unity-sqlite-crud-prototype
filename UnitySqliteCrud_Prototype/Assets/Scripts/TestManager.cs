@@ -55,6 +55,7 @@ public class TestManager : MonoBehaviour
     {
         List<User> users = _usersContext.GetAllUsers();
 
+        ClearConsolePanel();
         users.ForEach(user => consolePanelText.text += user.ToString() + Environment.NewLine);
     }
 
@@ -102,7 +103,7 @@ public class TestManager : MonoBehaviour
         ClearInputFields();
     }
 
-        private void ToggleCrudPanel(bool value)
+    private void ToggleCrudPanel(bool value)
         => crudMasterPanel.SetActive(value);
 
     private void UpdateCrudPanel(string operation)
@@ -119,57 +120,118 @@ public class TestManager : MonoBehaviour
 
     public void CreateUser()
     {
-        User user = new(userNameInputField.text, userEmailInputField.text);
-
         StringBuilder sb = new();
-        sb.AppendLine("<b>CREATE new user with:</b>");
-        sb.AppendLine("Id: " + user.Id);
-        sb.AppendLine("Name: " + user.Name);
-        sb.AppendLine("Email: " + user.Email);
-        sb.AppendLine("CreatedDate: " + user.CreatedDate);
-        sb.AppendLine("LastUpdatedDate: " + user.LastUpdatedDate);
 
-        consolePanelText.text = sb.ToString();
+        try
+        {
+            User user = new(userNameInputField.text, userEmailInputField.text);
 
-        CloseCrudPanel();
+            _usersContext.Insert(user);
+
+            sb.AppendLine("<b>Created user:</b>");
+            sb.AppendUser(user);
+        }
+        catch (Exception ex)
+        {
+            sb.AppendLine("Failed!");
+            sb.AppendLine("Error: " + ex.Message);
+        }
+        finally
+        {
+            CloseCrudPanel();
+            UpdateConsolePanel(sb.ToString());
+        }
     }
 
     public void ReadUser()
     {
         StringBuilder sb = new();
-        sb.AppendLine("<b>READ user with:</b>");
-        sb.AppendLine("Id: " + userIdInputField.text);
 
-        consolePanelText.text = sb.ToString();
+        try
+        {
+            User? user = GetUserById(new Guid(userIdInputField.text));
 
-        CloseCrudPanel();
+            sb.AppendLine("<b>User:</b>");
+
+            if (user == null)
+                sb.AppendLine("Not found a User with Id: " + userIdInputField.text);
+            else
+                sb.AppendUser(user);
+        }
+        catch (Exception ex)
+        {
+            sb.AppendLine("Failed!");
+            sb.AppendLine("Error: " + ex.Message);
+        }
+        finally
+        {
+            CloseCrudPanel();
+            UpdateConsolePanel(sb.ToString());
+        }
     }
 
     public void UpdateUser()
     {
         StringBuilder sb = new();
-        sb.AppendLine("<b>UPDATE user with:</b>");
-        sb.AppendLine("Id: " + userIdInputField.text);
-        sb.AppendLine("<b>SET</b>");
-        sb.AppendLine("Name: " + userNameInputField.text);
-        sb.AppendLine("Email: " + userEmailInputField.text);
-        sb.AppendLine("LastUpdatedDate: " + DateTime.Now);
 
-        consolePanelText.text = sb.ToString();
+        try
+        {
+            Guid id = new Guid(userIdInputField.text);
+            User? user = GetUserById(id);
 
-        CloseCrudPanel();
+            if (user == null)
+                sb.AppendLine("Not found a User with Id: " + userIdInputField.text);
+            else
+            {
+                user = _usersContext.Update(id, userNameInputField.text, userEmailInputField.text);
+                sb.AppendLine("<b>Updated User:</b>");
+                sb.AppendUser(user);
+            }
+        }
+        catch (Exception ex)
+        {
+            sb.AppendLine("Failed!");
+            sb.AppendLine("Error: " + ex.Message);
+        }
+        finally
+        {
+            CloseCrudPanel();
+            UpdateConsolePanel(sb.ToString());
+        }
     }
 
     public void DeleteUser()
     {
         StringBuilder sb = new();
-        sb.AppendLine("<b>DELETE user with:</b>");
-        sb.AppendLine("Id: " + userIdInputField.text);
 
-        consolePanelText.text = sb.ToString();
+        try
+        {
+            Guid id = new Guid(userIdInputField.text);
+            User? user = GetUserById(id);
 
-        CloseCrudPanel();
+            if (user == null)
+                sb.AppendLine("Not found a User with Id: " + userIdInputField.text);
+            else
+            {
+                _usersContext.Delete(id);
+                sb.AppendLine("<b>Deleted user:</b>");
+                sb.AppendUser(user);
+            }
+        }
+        catch (Exception ex)
+        {
+            sb.AppendLine("Failed!");
+            sb.AppendLine("Error: " + ex.Message);
+        }
+        finally
+        {
+            CloseCrudPanel();
+            UpdateConsolePanel(sb.ToString());
+        }
     }
+
+    private User? GetUserById(Guid id)
+        => _usersContext.Select(id);
 
     private void ClearInputFields()
     {
@@ -177,4 +239,12 @@ public class TestManager : MonoBehaviour
         userNameInputField.text = "";
         userEmailInputField.text = "";
     }
+
+    private void ClearConsolePanel()
+    {
+        consolePanelText.text = "";
+    }
+
+    private void UpdateConsolePanel(string text)
+        => consolePanelText.text = text;
 }
