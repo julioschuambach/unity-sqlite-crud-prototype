@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Class for tests during development.
@@ -8,6 +10,8 @@ public class TestManager : MonoBehaviour
 {
     private readonly DatabaseContext _databaseContext;
     private readonly UsersContext _usersContext;
+
+    public Text consolePanelText;
 
     public TestManager()
     {
@@ -25,6 +29,6 @@ public class TestManager : MonoBehaviour
     {
         List<User> users = _usersContext.GetAllUsers();
 
-        users.ForEach(user => Debug.Log(user.ToString()));
+        users.ForEach(user => consolePanelText.text += user.ToString() + Environment.NewLine);
     }
 }

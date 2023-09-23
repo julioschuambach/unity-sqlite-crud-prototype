@@ -27,5 +27,10 @@ public class User
     }
 
     public override string ToString()
-        => $"Id: {Id}, Name: {Name}, E-mail: {Email}.";
+        => $"<b>Id:</b> {Id}" + 
+        Environment.NewLine + 
+        $"<b>Name:</b> {Name}" +
+        Environment.NewLine + 
+        $"<b>E-mail:</b> {Email}" +
+        Environment.NewLine;
 }
