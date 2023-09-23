@@ -272,7 +272,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '[Operation]'
+  m_Text: Submit
 --- !u!222 &191625891
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -298,7 +298,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &194113880
 RectTransform:
   m_ObjectHideFlags: 0
@@ -585,7 +585,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 219614309}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2043336197}
+        m_TargetAssemblyTypeName: TestManager, Assembly-CSharp
+        m_MethodName: CloseCrudPanel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &219614309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -633,6 +645,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 510975277}
+  - component: {fileID: 510975281}
   - component: {fileID: 510975280}
   - component: {fileID: 510975279}
   - component: {fileID: 510975278}
@@ -745,6 +758,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 510975276}
   m_CullTransparentMesh: 1
+--- !u!114 &510975281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 510975276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19372f1b21d9f2847a3c2d297785378b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  operation: 2
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1086,7 +1112,7 @@ GameObject:
   - component: {fileID: 838492877}
   - component: {fileID: 838492876}
   m_Layer: 5
-  m_Name: Crud_Panel_Title
+  m_Name: Crud_Panel_Title_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1625,6 +1651,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1341827011}
+  - component: {fileID: 1341827015}
   - component: {fileID: 1341827014}
   - component: {fileID: 1341827013}
   - component: {fileID: 1341827012}
@@ -1737,6 +1764,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1341827010}
   m_CullTransparentMesh: 1
+--- !u!114 &1341827015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1341827010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19372f1b21d9f2847a3c2d297785378b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  operation: 1
 --- !u!1 &1387985811
 GameObject:
   m_ObjectHideFlags: 0
@@ -2234,6 +2274,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1678906333}
+  - component: {fileID: 1678906337}
   - component: {fileID: 1678906336}
   - component: {fileID: 1678906335}
   - component: {fileID: 1678906334}
@@ -2346,6 +2387,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1678906332}
   m_CullTransparentMesh: 1
+--- !u!114 &1678906337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1678906332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19372f1b21d9f2847a3c2d297785378b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  operation: 3
 --- !u!1 &1788613766
 GameObject:
   m_ObjectHideFlags: 0
@@ -2648,6 +2702,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1891449621}
+  - component: {fileID: 1891449625}
   - component: {fileID: 1891449624}
   - component: {fileID: 1891449623}
   - component: {fileID: 1891449622}
@@ -2760,6 +2815,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1891449620}
   m_CullTransparentMesh: 1
+--- !u!114 &1891449625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1891449620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19372f1b21d9f2847a3c2d297785378b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  operation: 0
 --- !u!1 &1957619563
 GameObject:
   m_ObjectHideFlags: 0
@@ -2911,6 +2979,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   consolePanelText: {fileID: 914247977}
+  crudMasterPanel: {fileID: 194113879}
+  crudPanelTitle: {fileID: 838492876}
+  userIdInputField: {fileID: 204224146}
+  userNameInputField: {fileID: 2144264112}
+  userEmailInputField: {fileID: 1600541332}
+  submitButton: {fileID: 1957619565}
 --- !u!4 &2043336198
 Transform:
   m_ObjectHideFlags: 0
